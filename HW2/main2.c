@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    FILE *fp, *fp2;
+    char ch[1];
+
+    fp = fopen("main2.c", "r");
+    fp2 = fopen("main2.txt", "wb+");
+
+    fseek(fp, 0 ,SEEK_SET);
+    while(fread(ch,sizeof(char),1,fp)){
+        fwrite(ch,sizeof(ch),1,fp2);
+        fseek(fp,0,SEEK_CUR);
+    }
+
+    fclose(fp);
+    fclose(fp2);
+
+    return 0;
+}
