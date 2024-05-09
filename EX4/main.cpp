@@ -12,14 +12,28 @@ public:
     Fueltank(int FueltankCapacity = 3000, int Gas = 98) : m_FueltankCapacity(FueltankCapacity), m_Gas_grade(Gas) {}
 
     void fuel_up(int v, int gas) {
+        if (v > m_FueltankCapacity) {
+            cout << "Error: FueltankCapacity: " << m_FueltankCapacity << " but fuel up: " << v << endl;
+            v = m_FueltankCapacity; // 使用燃料箱容量值
+        }
+
+        if (gas < 90 || gas > 98) {
+            cout << "Error: Gas_grade: " << gas << " Correct Gas_grade: " << m_Gas_grade << endl;
+            gas = m_Gas_grade; // 使用預設值
+        }
+
         m_FueltankCapacity += v;
         m_Gas_grade = gas;
         cout << "fuel_up: " << v << " Gas_grade: " << m_Gas_grade << endl;
     }
 
+
     void set_Gas_grade(int Gas_grade) {
+        
         cout << "Set Gas_grade: " << Gas_grade << endl;
         m_Gas_grade = Gas_grade;
+        
+        
     }
 
     int get_Gas_grade() {
@@ -72,6 +86,6 @@ int main() {
     AUDI_Car car_2("A1", 2021, 2);
     car_2.set_Gas_grade(95);
     cout << car_2.get_brand() << ": Gas_grade = " << car_2.get_Gas_grade() << endl;
-    car_2.fuel_up(300, 95);
+    car_2.fuel_up(300000, 99);
     return 0;
 }
