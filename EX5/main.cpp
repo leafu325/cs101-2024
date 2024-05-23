@@ -5,11 +5,11 @@
 #include <regex>
 using namespace std;
 
-class myString{
+class myString {
 private:
     string m_str;
 public:
-    myString(string str){
+    myString(string str) {
         m_str = str;
     }
 };
@@ -36,7 +36,7 @@ private:
     }
 
     void findClassNames(const string &content) {
-        regex classRegex(R"(\bclass\s+([a-zA-Z_]\w*))");
+        regex classRegex("\\bclass\\s+([a-zA-Z_]\\w*)\\s*\\{");
         smatch match;
         string::const_iterator searchStart(content.cbegin());
 
@@ -52,8 +52,7 @@ public:
     }
 
     void showClass() const {
-        char c = 'c';
-        cout << classNames.size() << " "<< c <<"lass in main.cpp" << endl;
+        cout << classNames.size() << " class in main.cpp" << endl;
         for (const string &className : classNames) {
             cout << className << endl;
         }
@@ -61,7 +60,7 @@ public:
 };
 
 int main() {
-    ReadClass rfile("main.cpp"); 
+    ReadClass rfile("main.cpp");
     rfile.showClass();
     return 0;
 }
